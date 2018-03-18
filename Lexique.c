@@ -87,8 +87,8 @@ int main(int argc, char const *argv[])
 				printf("absent\n");
 			break;
 		case 4:
-			
-			printf("-S\n");
+			afficherArbre(a);
+			printf("\n");
 			break;
 		default:
 			break;

@@ -1,25 +1,30 @@
-# imac1_lexical_tree
-Programme C - Arbre Lexicographique - Tom Samaille, Florian Torres
+# Arbre Lexical en C
+> Programme C - Arbre Lexicographique - Tom Samaille, Florian Torres
 
 ### Différentes commandes possibles :
+
 Charge le lexique **dico**
-```bash
+```shell
 ./Lexique dico
 ```
+
 Affiche les mots du lexique **dico** en ordre alphabétique
-```bash
+```shell
 ./Lexique -l dico
 ```
+
 Sauvegarde les mots du lexique **dico** en ordre alphabétique (au format .L)
-```bash
+```shell
 ./Lexique -s dico
 ```
+
 Vérifier si un **mot** existe dans le **dico**
-```bash
+```shell
 ./Lexique -r mot dico
 ```
-Sauvegarde les mots du lexique **dico** au format .DICO
-```bash
+
+Sauvegarde l'arbre lexical **dico** au format .DICO
+```shell
 ./Lexique -S dico
 ```
 
@@ -27,9 +32,9 @@ Sauvegarde les mots du lexique **dico** au format .DICO
 - [x] Afficher les mots du lexique
 - [x] Sauvegarder les mots dans un fichier
 - [x] Indiquer si un mot est présent dans le texte sous forme **present** ou **absent**
-- [x] Option -l
-- [x] Option -s
-- [x] Option -r
-- [ ] Enregistrer au format .DICO (option -S)
+- [x] Option -l (afficher mots du lexique)
+- [x] Option -s (sauvegarder mots du lexique)
+- [x] Option -r (Vérifier si un mot existe dans le lexique)
+- [ ] option -S (Enregistrer au format .DICO)
 - [ ] Rédiger le rapport
 - [ ] Commenter les fonctions
