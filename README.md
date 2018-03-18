@@ -2,15 +2,26 @@
 Programme C - Arbre Lexicographique - Tom Samaille, Florian Torres
 
 ### Différentes commandes possibles :
-`./Lexique dico`
+Charge le lexique **dico**
+```bash
+./Lexique dico
+```
 Affiche les mots du lexique **dico** en ordre alphabétique
-`./Lexique -l dico`
+```bash
+./Lexique -l dico
+```
 Sauvegarde les mots du lexique **dico** en ordre alphabétique (au format .L)
-`./Lexique -s dico`
+```bash
+./Lexique -s dico
+```
 Vérifier si un **mot** existe dans le **dico**
-`./Lexique -r mot dico`
+```bash
+./Lexique -r mot dico
+```
 Sauvegarde les mots du lexique **dico** au format .DICO
-`./Lexique -S dico`
+```bash
+./Lexique -S dico
+```
 
 ### A faire :
 - [x] Afficher les mots du lexique

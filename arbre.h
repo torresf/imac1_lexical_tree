@@ -28,3 +28,5 @@ void ajouterBranche(Arbre *a, char *mot);
 
 /* Ajoute un mot passé en paramètre dans le lexique lui-même passé en paramètre */
 void ajouterMot(Arbre *a, char *mot);
+
+void sauvegardeArbre(Arbre a);

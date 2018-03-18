@@ -100,3 +100,12 @@ void ajouterMot(Arbre *a, char *mot) {
         }
     }
 }
+
+void sauvegardeArbre(Arbre a){
+    if (a!=NULL){
+        if (a->lettre != '\0')
+		printf("%c\n", a->lettre);
+		sauvegardeArbre(a->filsg);
+		sauvegardeArbre(a->frered);
+	}
+}
