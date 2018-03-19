@@ -54,17 +54,27 @@ int main(int argc, char const *argv[])
 				scanf(" %d", &mode);
 			}
 		}
-		/* Lecture d'un fichier */
-		char tmp[TAILLE_MAX];
-		fichier = fopen(fichier_in, "r+");
-		if (fichier != NULL) {
-			while (fscanf(fichier, "%s", tmp) != EOF) {
-	   			ajouterMot(&a, tmp);
-	   		}
-	    	fclose(fichier);
+		
+		/* Test de connexion avec le fichier sprintf("%s.DICO,fichier_in) auquel cas on recréer l'arbre et on l'utilise */
+		char fichier_dico_name[TAILLE_MAX];
+		sprintf(fichier_dico_name, "%s.DICO", fichier_in);
+		FILE *fichier_dico = fopen(fichier_dico_name, "r+");
+		if (fichier_dico != NULL && mode != 4) {
+			printf("Le fichier DICO existe déjà. Création de l'arbre à partir du fichier.\n");
+			a = chargerArbre(fichier_dico);
 		} else {
-	        printf("Impossible d'ouvrir le fichier.\n");
-	    }
+			/* Lecture d'un fichier */
+			char tmp[TAILLE_MAX];
+			fichier = fopen(fichier_in, "r+");
+			if (fichier != NULL) {
+				while (fscanf(fichier, "%s", tmp) != EOF) {
+		   			ajouterMot(&a, tmp);
+		   		}
+		    	fclose(fichier);
+			} else {
+		        printf("Impossible d'ouvrir le fichier.\n");
+		    }
+		}
 	} else {
 		printf("Traitement impossible. Veuillez entrer le nom du fichier à traiter.\n");
 	}
@@ -72,6 +82,7 @@ int main(int argc, char const *argv[])
 	switch (mode) {
 		case 1:
 			afficherMots(a);
+			creerDot(a,fichier_in);
 			break;
 		case 2:
 			sauvegarderMots(a, fichier_in);
@@ -87,7 +98,7 @@ int main(int argc, char const *argv[])
 				printf("absent\n");
 			break;
 		case 4:
-			afficherArbre(a);
+			sauvegarderArbre(a, fichier_in);
 			printf("\n");
 			break;
 		default:

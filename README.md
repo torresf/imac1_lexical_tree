@@ -35,6 +35,14 @@ Sauvegarde l'arbre lexical **dico** au format .DICO
 - [x] Option -l (afficher mots du lexique)
 - [x] Option -s (sauvegarder mots du lexique)
 - [x] Option -r (Vérifier si un mot existe dans le lexique)
-- [ ] option -S (Enregistrer au format .DICO)
+- [x] option -S (Enregistrer au format .DICO)
+- [x] Si le .DICO existe, récupérer l'arbre déjà présent dans le fichier.DICO
 - [ ] Rédiger le rapport
-- [ ] Commenter les fonctions
+- [x] Commenter les fonctions
+- [ ] Créer une constante TAILLE_MAX_MOT et gérer tous les tableaux de caractères avec cette variable (à  priori 51 : à revérifier)
+- [ ] Vérifier l'intégrité des noms de fonctions / variables etc...
+- [ ] Free la mémoire : viderArbre(Arbre *a);
+
+### Améliorations : 
+- [x] Possibilité d'afficher l'abre avec la création d'un fichier.dot
+- [ ] Vérifier le .dot généré

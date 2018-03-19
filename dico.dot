@@ -1,0 +1,61 @@
+digraph arbre {
+node [shape=record, height=.1]
+edge [tailclip=false, arrowtail=dot, dir=both];
+
+n0x207a250 [label="<lettre> c | <gauche> | <droit>";]
+n0x207a250:gauche:c -> n0x207a270:lettre;
+n0x207a270 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a270:gauche:c -> n0x207a290:lettre;
+n0x207a290 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a290:droit:c -> n0x207a2b0:lettre;
+n0x207a2b0 [label="<lettre> s | <gauche> | <droit>";]
+n0x207a2b0:gauche:c -> n0x207a2d0:lettre;
+n0x207a2d0 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a250:droit:c -> n0x207a2f0:lettre;
+n0x207a2f0 [label="<lettre> d | <gauche> | <droit>";]
+n0x207a2f0:gauche:c -> n0x207a310:lettre;
+n0x207a310 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a310:gauche:c -> n0x207a330:lettre;
+n0x207a330 [label="<lettre> s | <gauche> | <droit>";]
+n0x207a330:gauche:c -> n0x207a350:lettre;
+n0x207a350 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a2f0:droit:c -> n0x207a370:lettre;
+n0x207a370 [label="<lettre> l | <gauche> | <droit>";]
+n0x207a370:gauche:c -> n0x207a390:lettre;
+n0x207a390 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a390:gauche:c -> n0x207a3b0:lettre;
+n0x207a3b0 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a3b0:droit:c -> n0x207a3d0:lettre;
+n0x207a3d0 [label="<lettre> s | <gauche> | <droit>";]
+n0x207a3d0:gauche:c -> n0x207a3f0:lettre;
+n0x207a3f0 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a3d0:droit:c -> n0x207a410:lettre;
+n0x207a410 [label="<lettre> t | <gauche> | <droit>";]
+n0x207a410:gauche:c -> n0x207a430:lettre;
+n0x207a430 [label="<lettre> t | <gauche> | <droit>";]
+n0x207a430:gauche:c -> n0x207a450:lettre;
+n0x207a450 [label="<lettre> r | <gauche> | <droit>";]
+n0x207a450:gauche:c -> n0x207a470:lettre;
+n0x207a470 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a470:gauche:c -> n0x207a490:lettre;
+n0x207a490 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a370:droit:c -> n0x207a4b0:lettre;
+n0x207a4b0 [label="<lettre> m | <gauche> | <droit>";]
+n0x207a4b0:gauche:c -> n0x207a4d0:lettre;
+n0x207a4d0 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a4d0:gauche:c -> n0x207a4f0:lettre;
+n0x207a4f0 [label="<lettre> s | <gauche> | <droit>";]
+n0x207a4f0:gauche:c -> n0x207a510:lettre;
+n0x207a510 [label="<lettre> \0 | <gauche> | <droit>";]
+n0x207a4f0:droit:c -> n0x207a530:lettre;
+n0x207a530 [label="<lettre> t | <gauche> | <droit>";]
+n0x207a530:gauche:c -> n0x207a550:lettre;
+n0x207a550 [label="<lettre> t | <gauche> | <droit>";]
+n0x207a550:gauche:c -> n0x207a570:lettre;
+n0x207a570 [label="<lettre> r | <gauche> | <droit>";]
+n0x207a570:gauche:c -> n0x207a590:lettre;
+n0x207a590 [label="<lettre> e | <gauche> | <droit>";]
+n0x207a590:gauche:c -> n0x207a5b0:lettre;
+n0x207a5b0 [label="<lettre> \0 | <gauche> | <droit>";]
+
+}
