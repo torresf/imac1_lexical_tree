@@ -1,3 +1,5 @@
+/* SAMAILLE Tom - TORRES Florian */
+
 #include "arbre.h"
 
 /* Affiche les mots du lexique passé en paramètre en ordre alphabétique */
@@ -77,8 +79,6 @@ Noeud *allouerNoeud(char lettre) {
 	}
 	exit(EXIT_FAILURE);
 }
-
-/* LE PROBLEME DU CARACTERE \0 AU DEBUT VIENS DE LA CREATION DE L'ARBRE !!!!!!!!!!!!! */
 
 /* Ajoute une branche (symbolisée par un mot passé en paramètre) à l'arbre lui aussi passé en paramètre */
 void ajouterBranche(Arbre *a, char *mot) {
@@ -197,7 +197,7 @@ void creerDot(Arbre a, char *nomFichierIn){
 	FILE *out;
 	char name[TAILLE_MAX];
 	sprintf(name,"%s.dot", nomFichierIn);
-	out=fopen(name,"w"); /* suppose OK*/
+	out=fopen(name,"w");
 	ecrireDebut(out);
 	ecrireArbre(out,a);
 	ecrireFin(out);

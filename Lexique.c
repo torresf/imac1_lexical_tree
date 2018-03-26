@@ -1,3 +1,5 @@
+/* SAMAILLE Tom - TORRES Florian */
+
 #include "arbre.h"
 
 int main(int argc, char const *argv[])
