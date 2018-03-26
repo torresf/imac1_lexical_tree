@@ -2,28 +2,10 @@
 
 int main(int argc, char const *argv[])
 {
-	/* Test
-	Arbre test;
-	ajouterMot(&test, "ce");
-	ajouterMot(&test, "ces");
-	ajouterMot(&test, "des");
-	ajouterMot(&test, "le");
-	ajouterMot(&test, "les");
-	ajouterMot(&test, "lettre");
-	ajouterMot(&test, "mes");
-	ajouterMot(&test, "mettre");
-	ajouterMot(&test, "avion");
-	ajouterMot(&test, "zebre");
-	ajouterMot(&test, "zèbre");
-	ajouterMot(&test, "feuille");
-	ajouterMot(&test, "feuille");
-	afficherMots(test);
-	sauvegarderMots(test, "out"); */
-	
-	Arbre a;
+	Arbre a = NULL;
 	FILE* fichier = NULL;
 	char fichier_in[TAILLE_MAX];
-	char mot_a_chercher[TAILLE_MAX] = {'\0'};
+	char mot_a_chercher[TAILLE_MAX_MOT] = {'\0'};
 	int mode = 0;
 	
 	if (argv[1] != NULL){
@@ -50,7 +32,7 @@ int main(int argc, char const *argv[])
 			printf("Que souhaitez-vous faire ?\n");
 			/* Choix du mode */
 			while (mode < 1 || mode > 4) {
-				printf(" 1: Afficher le Lexique \n 2: Sauvegarder le lexique \n 3: Vérifier si un mot est présent \n 4: sauvegarder au format .DICO\n");
+				printf(" 1: Afficher le lexique \n 2: Sauvegarder le lexique \n 3: Vérifier si un mot est présent \n 4: Sauvegarder au format .DICO\n");
 				scanf(" %d", &mode);
 			}
 		}
@@ -64,25 +46,23 @@ int main(int argc, char const *argv[])
 			a = chargerArbre(fichier_dico);
 		} else {
 			/* Lecture d'un fichier */
-			char tmp[TAILLE_MAX];
+			char tmp[TAILLE_MAX_MOT];
 			fichier = fopen(fichier_in, "r+");
 			if (fichier != NULL) {
-				while (fscanf(fichier, "%s", tmp) != EOF) {
-		   			ajouterMot(&a, tmp);
-		   		}
-		    	fclose(fichier);
-			} else {
-		        printf("Impossible d'ouvrir le fichier.\n");
-		    }
+				while (fscanf(fichier, "%s", tmp) != EOF)
+					ajouterMot(&a, tmp);
+				fclose(fichier);
+			} else
+				printf("Impossible d'ouvrir le fichier.\n");
 		}
-	} else {
+	} else
 		printf("Traitement impossible. Veuillez entrer le nom du fichier à traiter.\n");
-	}
 	
 	switch (mode) {
 		case 1:
 			afficherMots(a);
 			creerDot(a,fichier_in);
+			system("dot -Tpdf dico.dot -o dico.pdf");
 			break;
 		case 2:
 			sauvegarderMots(a, fichier_in);

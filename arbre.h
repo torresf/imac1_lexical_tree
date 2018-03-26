@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define TAILLE_MAX 1024
+#define TAILLE_MAX_MOT 51
 
 typedef struct noeud{
 	unsigned char lettre;

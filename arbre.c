@@ -2,12 +2,13 @@
 
 /* Affiche les mots du lexique passé en paramètre en ordre alphabétique */
 void afficherMots(Arbre a) {
-    static char buffer[TAILLE_MAX]; /* Buffer servant à stocker les mots à écrire */
+    static char buffer[TAILLE_MAX_MOT]; /* Buffer servant à stocker les mots à écrire */
     static int cur = 0; /* Case courante à remplir */
     if (a != NULL){
         buffer[cur++]=a->lettre;
-        if (a->lettre == '\0')
+        if (a->lettre == '\0'){
             printf("%s \n", buffer);
+        }
         else 
             afficherMots(a->filsg);
         cur--;
@@ -20,19 +21,19 @@ void afficherMots(Arbre a) {
 
 /* Fonction récursive qui écrit les mots de l'arbre passé en paramètre dans le fichier lui aussi passé en paramètre */
 void ecrireMots(Arbre a, FILE *fichier) {
-    static char buffer[TAILLE_MAX]; /* Buffer servant à stocker les mots à écrire */
+    static char buffer[TAILLE_MAX_MOT]; /* Buffer servant à stocker les mots à écrire */
         static int cur = 0; /* Case courante à remplir */
         if (a != NULL) {
             buffer[cur++]=a->lettre;
-            if (a->lettre == '\0')
-                fprintf(fichier, "%s ", buffer);
-            else 
+            if (a->lettre == '\0') {
+                if (strcmp(buffer, "") != 0)
+                    fprintf(fichier, "%s ", buffer);
+            } else
                 ecrireMots(a->filsg, fichier);
             cur--;
             if (a->frered != NULL)
                 ecrireMots(a->frered, fichier);
-        }
-        else 
+        } else
             fprintf(fichier, "Rien à afficher --> L'arbre est vide\n");
 }
 
@@ -56,7 +57,7 @@ int estPresent(Arbre a, const char *mot) {
         return 0;
     if (*mot < a->lettre)
         return 0;
-    if (*mot==a->lettre){
+    if (*mot == a->lettre){
         if (*mot == '\0')
             return 1;
         return estPresent(a->filsg, mot+1);
@@ -77,26 +78,27 @@ Noeud *allouerNoeud(char lettre) {
 	exit(EXIT_FAILURE);
 }
 
+/* LE PROBLEME DU CARACTERE \0 AU DEBUT VIENS DE LA CREATION DE L'ARBRE !!!!!!!!!!!!! */
+
 /* Ajoute une branche (symbolisée par un mot passé en paramètre) à l'arbre lui aussi passé en paramètre */
 void ajouterBranche(Arbre *a, char *mot) {
     *a = allouerNoeud(*mot);
-    if (*a != NULL) {
-        if (*mot != '\0') 
-            ajouterBranche(&((*a)->filsg), mot+1);
+    if (*a != NULL && *mot != '\0') {
+        ajouterBranche(&((*a)->filsg), mot+1);
     }
 }
 
 /* Ajoute un mot passé en paramètre dans le lexique lui-même passé en paramètre */
 void ajouterMot(Arbre *a, char *mot) {
-    if (*a == NULL)
+    if (*a == NULL) {
         ajouterBranche(a, mot);
-    else {
+    } else {
         if ((*a)->lettre < *mot)
             ajouterMot(&((*a)->frered), mot);
         else {
-            if (((*a)->lettre == *mot) && (*mot != '\0'))
+            if (((*a)->lettre == *mot) && (*mot != '\0')) {
                 ajouterMot(&((*a)->filsg), mot+1);
-            else {
+            } else {
                 if (*mot != '\0') {
                     Arbre tmp = NULL;
                     ajouterBranche(&tmp, mot);
@@ -109,15 +111,15 @@ void ajouterMot(Arbre *a, char *mot) {
 }
 
 /* Affiche dans le terminal l'arbre passé en paramètre selon la syntaxe du sujet (format DICO) */
-void afficherArbre(Arbre a){
-    if (a!=NULL){
+void afficherArbre(Arbre a) {
+    if (a!=NULL) {
         if (a->lettre != '\0'){
 		    printf("%c", a->lettre);
 		    afficherArbre(a->filsg);
         } else 
             printf(" ");
         if (a->frered == NULL)
-            printf("'\\n'");
+            printf("\n");
 		afficherArbre(a->frered);
 	}
 }
@@ -131,7 +133,7 @@ void ecrireDICO(Arbre a, FILE *fichier){
         } else 
             fprintf(fichier, " ");
         if (a->frered == NULL)
-            fprintf(fichier ,"'\\n'");
+            fprintf(fichier ,"\n");
 		ecrireDICO(a->frered, fichier);
 	}
 }
@@ -155,32 +157,27 @@ Arbre chargerArbre(FILE *fichier_dico) {
     Arbre a = NULL;
 	if (fichier_dico != NULL) {
 	    char ligne[TAILLE_MAX];
-        char buf[TAILLE_MAX];
-        int j;
+        char buf[TAILLE_MAX_MOT];
+        int j = 0;
         while (fgets(ligne, sizeof ligne, fichier_dico) != NULL)
         {
             int i = 0;
-            while (ligne[i] != '\0') {
-                if (ligne[i] == '\'' && ligne[i+1] == '\\' && ligne[i+2] == 'n' && ligne[i+3] == '\'') {
-                    j--;
-                    i = i+4;
+            while (ligne[i] != '\n') {
+                if (ligne[i] == ' ') {
+                    ajouterMot(&a, buf);
                 } else {
-                    if (ligne[i] == ' ') {
-                        buf[j] = '\0';
-                        ajouterMot(&a, buf);
-                    } else {
-                        buf[j] = ligne[i];
-                        j++;
-                    }
-                    i++;
+                    buf[j] = ligne[i];
+                    j++;
                 }
+                i++;
             }
+            buf[j] = '\0';
+            j--;
         }
         fclose (fichier_dico);
 	}
     return a;
 }
-
 
 /* Création arbre dans un fichier DOT */
 void creerDot(Arbre a, char *nomFichierIn){
@@ -203,11 +200,11 @@ void ecrireFin(FILE* stream){
 void ecrireArbre(FILE* stream, Arbre a){
 	if (a != NULL){
 	    if (a->lettre == '\0')
-	        fprintf(stream, "n%p [label=\"<lettre> \\0 | <gauche> | <droit>\";]\n", a);
+	        fprintf(stream, "n%p [label=\"{<lettre> %s |<here>}| <droit>\";]\n", a, "\\\\0");
 		else
-		    fprintf(stream, "n%p [label=\"<lettre> %c | <gauche> | <droit>\";]\n", a, a->lettre);
+		    fprintf(stream, "n%p [label=\"{<lettre> %c |<here>}| <droit>\";]\n", a, a->lettre);
 		if (a->filsg != NULL){
-			fprintf(stream, "n%p:gauche:c -> n%p:lettre;\n", a, a->filsg);
+			fprintf(stream, "n%p:here -> n%p:lettre;\n", a, a->filsg);
 			ecrireArbre(stream, a->filsg);
 		}
 		if (a->frered != NULL){
