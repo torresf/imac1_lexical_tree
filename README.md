@@ -40,8 +40,8 @@ Sauvegarde l'arbre lexical **dico** au format .DICO
 - [x] Commenter les fonctions
 - [x] Créer une constante TAILLE_MAX_MOT et gérer tous les tableaux de caractères avec cette variable (à  priori 51 : à revérifier)
 - [x] Vérifier l'intégrité des noms de fonctions / variables etc...
-- [ ] Free la mémoire : viderArbre(Arbre *a);
+- [x] Free la mémoire : libererArbre(Arbre *a);
 - [x] Rédiger le rapport
 
 ### Améliorations : 
-- [x] Possibilité d'afficher l'abre avec la création d'un fichier .dot
+- [x] Possibilité d'afficher l'arbre avec la création d'un fichier .dot

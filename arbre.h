@@ -43,6 +43,9 @@ void sauvegarderArbre(Arbre a, char *nomOut);
 /* Création d'un arbre à partir d'un fichier .DICO. Retourne l'arbre créé */
 Arbre chargerArbre(FILE *fichier_dico);
 
+/* Nettoyage de la mémoire allouée par les éléments de l'arbre */
+void libererArbre(Arbre *a);
+
 /* Création arbre dans un fichier DOT */
 void creerDot(Arbre a, char *nomFichierIn);
 void ecrireDebut(FILE* stream);

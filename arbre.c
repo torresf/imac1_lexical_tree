@@ -179,6 +179,19 @@ Arbre chargerArbre(FILE *fichier_dico) {
     return a;
 }
 
+/* Nettoyage de la mémoire allouée par les éléments de l'arbre */
+void libererArbre(Arbre *a) {
+    Arbre tmp = *a;
+    if(*a == NULL)
+        return;
+    if(tmp->filsg) 
+        libererArbre(&tmp->filsg);
+    if(tmp->frered)
+        libererArbre(&tmp->frered);
+    free(tmp);
+    *a = NULL;
+}
+
 /* Création arbre dans un fichier DOT */
 void creerDot(Arbre a, char *nomFichierIn){
 	FILE *out;
